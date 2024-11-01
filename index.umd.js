@@ -2239,8 +2239,8 @@
                 i.setAttribute("disabled", "");
                 var r = new Headers;
                 r.append("Content-Type", "application/json");
-                r.append("Authorization", "Bearer "+Qt.apiKey);
-
+                r.append("Authorization", "Bearer " + Qt.apiKey);
+                console.log("Model: " + Qt.model)
                 var o = ({
                     prompt: n.elements.message.value,
                     model: Qt.model,
