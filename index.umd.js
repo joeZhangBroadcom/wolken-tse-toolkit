@@ -2242,7 +2242,7 @@
                 r.append("Authorization", "Bearer " + Qt.apiKey);
                 console.log("Model: " + Qt.model)
                 var o = ({
-                    prompt: n.elements.message.value,
+                    prompt: Qt.sysPrompt + n.elements.message.value,
                     model: Qt.model,
                     "max_tokens" : 10000,
                     "temperature": 0.5,
