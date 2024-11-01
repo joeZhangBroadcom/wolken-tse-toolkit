@@ -2243,7 +2243,7 @@
 
                 var o = ({
                     prompt: n.elements.message.value,
-                    model: "meta-llama/Meta-Llama-3.1-70B-Instruct",
+                    model: Qt.model,
                     "max_tokens" : 10000,
                     "temperature": 0.5,
                     stream : Qt.stream
@@ -2349,6 +2349,7 @@
     var Qt = e({
             url: "",
             apiKey: "",
+            model: "",
             sysPrompt: "",
             threadId: null,
             max_tokens : 10000,
