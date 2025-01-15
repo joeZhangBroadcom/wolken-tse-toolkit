@@ -1,1 +1,1 @@
-let version = 1.9.9.3
+let latestVersion = 1.9.9.3
