@@ -1,1 +1,1 @@
-let latestVersion = 1.9.9.3
+const latestVersion = 1.9.9.3
