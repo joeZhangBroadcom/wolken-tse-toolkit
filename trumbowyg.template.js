@@ -1,5 +1,6 @@
 (function ($) {
     'use strict';
+    console.log("Template Plus plugin loaded");
 
     // Language support
     $.extend(true, $.trumbowyg, {
