@@ -257,7 +257,7 @@
                 // Default filename: YYYYMMDD-HHMMSS.json
                 var now = new Date();
                 var pad = n => n < 10 ? '0' + n : n;
-                var defaultName = now.getFullYear().toString() +
+                var defaultName = 'mytemplates' + now.getFullYear().toString() +
                     pad(now.getMonth() + 1) +
                     pad(now.getDate()) + '-' +
                     pad(now.getHours()) +
