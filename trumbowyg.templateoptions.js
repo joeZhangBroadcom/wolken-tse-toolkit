@@ -25,25 +25,24 @@
             }
         },
         plugins: {
-            templateoptions: { // <-- plugin name updated
-                init: function (t) {
-                    t.o.plugins.templateoptions = $.extend(true, {}, defaultOptions, t.o.plugins.templateoptions || {});
-
+            templateoptions: { 
+                init: function (trumbowyg) {
+                    trumbowyg.o.plugins.templateoptions = $.extend(true, {}, defaultOptions, trumbowyg.o.plugins.templateoptions || {});
                     // Register the dropdown button
-                    t.addBtnDef('templateOptions', {
+                    trumbowyg.addBtnDef('templateOptions', {
                         fn: function () {
                             var btnName = 'templateOptions';
-                            var dropdownPrefix = t.o.prefix + 'dropdown',
+                            var dropdownPrefix = trumbowyg.o.prefix + 'dropdown',
                                 dropdownOptions = {
-                                    class: dropdownPrefix + '-' + btnName + ' ' + dropdownPrefix + ' ' + t.o.prefix + 'fixed-top'
+                                    class: dropdownPrefix + '-' + btnName + ' ' + dropdownPrefix + ' ' + trumbowyg.o.prefix + 'fixed-top'
                                 };
                             dropdownOptions['data-' + dropdownPrefix] = btnName;
                             var $dropdown = $('<div/>', dropdownOptions);
 
-                            if (t.$box.find('.' + dropdownPrefix + '-' + btnName).length === 0) {
-                                t.$box.append($dropdown.hide());
+                            if (trumbowyg.$box.find('.' + dropdownPrefix + '-' + btnName).length === 0) {
+                                trumbowyg.$box.append($dropdown.hide());
                             } else {
-                                $dropdown = t.$box.find('.' + dropdownPrefix + '-' + btnName);
+                                $dropdown = trumbowyg.$box.find('.' + dropdownPrefix + '-' + btnName);
                             }
 
                             // Clear dropdown
@@ -51,26 +50,26 @@
 
                             // Add each template action as a button in the dropdown
                             var actions = [
-                                { btn: 'saveTemplateOptions', label: t.lang.saveTemplate },
-                                { btn: 'editTemplateOptions', label: t.lang.editTemplate },
-                                { btn: 'deleteTemplateOptions', label: t.lang.deleteTemplate },
-                                { btn: 'backupTemplatesOptions', label: t.lang.backupTemplate }
+                                { btn: 'saveTemplateOptions', label: trumbowyg.lang.saveTemplate },
+                                { btn: 'editTemplateOptions', label: trumbowyg.lang.editTemplate },
+                                { btn: 'deleteTemplateOptions', label: trumbowyg.lang.deleteTemplate },
+                                { btn: 'backupTemplatesOptions', label: trumbowyg.lang.backupTemplate }
                             ];
                             actions.forEach(function(action) {
-                                $dropdown.append(t.buildSubBtn(action.btn));
+                                $dropdown.append(trumbowyg.buildSubBtn(action.btn));
                             });
 
-                            t.dropdown(btnName);
+                            trumbowyg.dropdown(btnName);
                         },
                         hasIcon: false,
-                        text: t.lang.templateOptions + arrowSvg // Add arrow to button text
+                        text: trumbowyg.lang.templateOptions + arrowSvg // Add arrow to button text
                     });
 
                     // Register the action buttons
-                    t.addBtnDef('saveTemplateOptions', saveTemplateOptionsBtn(t));
-                    t.addBtnDef('editTemplateOptions', editTemplateOptionsBtn(t));
-                    t.addBtnDef('deleteTemplateOptions', deleteTemplateOptionsBtn(t));
-                    t.addBtnDef('backupTemplatesOptions', backupTemplatesOptionsBtn(t));
+                    trumbowyg.addBtnDef('saveTemplateOptions', saveTemplateOptionsBtn(trumbowyg));
+                    trumbowyg.addBtnDef('editTemplateOptions', editTemplateOptionsBtn(trumbowyg));
+                    trumbowyg.addBtnDef('deleteTemplateOptions', deleteTemplateOptionsBtn(trumbowyg));
+                    trumbowyg.addBtnDef('backupTemplatesOptions', backupTemplatesOptionsBtn(trumbowyg));
                 }
             }
         }
@@ -219,8 +218,8 @@
         return {
             fn: function () {
                 var templates = JSON.parse(localStorage.getItem('trumbowygTemplates') || '[]');
-                if (!templates.length) return alert('No templates to delete.');
                 var options = buildTemplateOptions(templates); // <-- Move this line up!
+                if (!templates.length) return alert('No templates to delete.');
                 var modalContent = `
                     <div style="font-size:0.85em;color:#888;margin-bottom:8px;">
                         This will permanently remove the selected template.
