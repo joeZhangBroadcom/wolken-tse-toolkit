@@ -1,19 +1,7 @@
 (function ($) {
     'use strict';
-    console.log("Template Plus plugin loaded");
-
-    // Language support
-    $.extend(true, $.trumbowyg, {
-        langs: {
-            en: {
-                templateplus: 'Template Plus',
-                saveTemplate: 'Save Template',
-                editTemplate: 'Edit Template',
-                deleteTemplate: 'Delete Template'
-            },
-            // ...other languages, update key to templateplus if needed...
-        }
-    });
+    
+    var defaultOptions = {};
 
     // Utility: Build dropdown options for templates
     function buildTemplateOptions(templates) {
@@ -22,12 +10,78 @@
         }).join('');
     }
 
-    // Template selector for dropdown
-    function templatePlusSelector(trumbowyg) {
+    // SVG arrow for dropdown (matches Trumbowyg style)
+    var arrowSvg = '<svg style="width:12px;height:12px;vertical-align:middle;margin-left:3px;" viewBox="0 0 24 24"><path fill="currentColor" d="M7 10l5 5 5-5z"/></svg>';
+
+    // Register plugin in Trumbowyg
+    $.extend(true, $.trumbowyg, {
+        langs: {
+            en: {
+                templateOptions: 'Template Options',
+                saveTemplate: 'Save',
+                editTemplate: 'Update',
+                deleteTemplate: 'Delete',
+                backupTemplate: 'Backup'
+            }
+        },
+        plugins: {
+            templateoptions: { // <-- plugin name updated
+                init: function (t) {
+                    t.o.plugins.templateoptions = $.extend(true, {}, defaultOptions, t.o.plugins.templateoptions || {});
+
+                    // Register the dropdown button
+                    t.addBtnDef('templateOptions', {
+                        fn: function () {
+                            var btnName = 'templateOptions';
+                            var dropdownPrefix = t.o.prefix + 'dropdown',
+                                dropdownOptions = {
+                                    class: dropdownPrefix + '-' + btnName + ' ' + dropdownPrefix + ' ' + t.o.prefix + 'fixed-top'
+                                };
+                            dropdownOptions['data-' + dropdownPrefix] = btnName;
+                            var $dropdown = $('<div/>', dropdownOptions);
+
+                            if (t.$box.find('.' + dropdownPrefix + '-' + btnName).length === 0) {
+                                t.$box.append($dropdown.hide());
+                            } else {
+                                $dropdown = t.$box.find('.' + dropdownPrefix + '-' + btnName);
+                            }
+
+                            // Clear dropdown
+                            $dropdown.html('');
+
+                            // Add each template action as a button in the dropdown
+                            var actions = [
+                                { btn: 'saveTemplateOptions', label: t.lang.saveTemplate },
+                                { btn: 'editTemplateOptions', label: t.lang.editTemplate },
+                                { btn: 'deleteTemplateOptions', label: t.lang.deleteTemplate },
+                                { btn: 'backupTemplatesOptions', label: t.lang.backupTemplate }
+                            ];
+                            actions.forEach(function(action) {
+                                $dropdown.append(t.buildSubBtn(action.btn));
+                            });
+
+                            t.dropdown(btnName);
+                        },
+                        hasIcon: false,
+                        text: t.lang.templateOptions + arrowSvg // Add arrow to button text
+                    });
+
+                    // Register the action buttons
+                    t.addBtnDef('saveTemplateOptions', saveTemplateOptionsBtn(t));
+                    t.addBtnDef('editTemplateOptions', editTemplateOptionsBtn(t));
+                    t.addBtnDef('deleteTemplateOptions', deleteTemplateOptionsBtn(t));
+                    t.addBtnDef('backupTemplatesOptions', backupTemplatesOptionsBtn(t));
+                }
+            }
+        }
+    });
+
+    // Template selector for dropdown (if needed elsewhere)
+    function templateOptionsSelector(trumbowyg) {
         var templates = JSON.parse(localStorage.getItem('trumbowygTemplates') || '[]');
         var dropdown = [];
         templates.forEach(function(template, idx) {
-            var btnName = 'templateplus_' + idx;
+            var btnName = 'templateoptions_' + idx;
             trumbowyg.addBtnDef(btnName, {
                 fn: function () {
                     trumbowyg.html(template.html);
@@ -41,13 +95,19 @@
     }
 
     // Save Template button
-    function saveTemplatePlusBtn(trumbowyg) {
+    function saveTemplateOptionsBtn(trumbowyg) {
         return {
             fn: function () {
                 var editorContent = trumbowyg.html();
+                var modalContent = `
+                    <div style="font-size:0.85em;color:#888;margin-bottom:8px;">
+                        Create a new template from current content. Template name is required.
+                    </div>
+                    <p>Template name: <input type="text" id="tbw-template-name" style="width: 90%"></p>
+                `;
                 var $modal = trumbowyg.$ed.trumbowyg('openModal', {
-                    title: 'Save Template',
-                    content: '<p>Template name: <input type="text" id="tbw-template-name" style="width: 90%"></p>'
+                    title: 'Create a new template',
+                    content: modalContent
                 });
 
                 $modal.on('tbwconfirm', function () {
@@ -64,9 +124,6 @@
                     };
                     templates.push(newTemplate);
                     localStorage.setItem('trumbowygTemplates', JSON.stringify(templates));
-                    if (typeof saveJSONToFile === 'function') {
-                        saveJSONToFile(templates, 'myTemplatePlus-' + (window.moment ? moment() : Date.now()) + '.json');
-                    }
                     alert('Template saved!');
                     trumbowyg.$ed.trumbowyg('closeModal');
                 });
@@ -76,23 +133,42 @@
                 });
             },
             hasIcon: false,
-            text: 'Save Template'
+            text: 'Create Template'
         };
     }
 
     // Edit Template button
-    function editTemplatePlusBtn(trumbowyg) {
+    function editTemplateOptionsBtn(trumbowyg) {
         return {
             fn: function () {
                 var templates = JSON.parse(localStorage.getItem('trumbowygTemplates') || '[]');
                 if (!templates.length) return alert('No templates to edit.');
                 var options = buildTemplateOptions(templates);
+
+                // Modal content with hidden new name input
+                var modalContent = `
+                    <div style="font-size:0.85em;color:#888;margin-bottom:8px;">
+                        This will replace the template with current content.
+                    </div>
+                    <p>Select template to update: 
+                        <select id="tbw-template-select" style="width:90%">${options}</select>
+                    </p>
+                    <div id="tbw-change-name-container" style="margin-bottom:8px;">
+                        <button type="button" id="tbw-change-name-btn" style="margin-top:4px;">Change template name</button>
+                    </div>
+                    <div id="tbw-new-name-row" style="display:none;">
+                        <p>New Template name: 
+                            <input type="text" id="tbw-template-edit-name" style="width:90%">
+                        </p>
+                    </div>
+                `;
+
                 var $modal = trumbowyg.$ed.trumbowyg('openModal', {
-                    title: 'Edit Template',
-                    content: '<p>Select template: <select id="tbw-template-select" style="width:90%">' + options + '</select></p>' +
-                             '<p>Template name: <input type="text" id="tbw-template-edit-name" style="width:90%"></p>'
+                    title: 'Update template',
+                    content: modalContent
                 });
 
+                // Set initial name in hidden input
                 function updateNameField() {
                     var idx = $modal.find('#tbw-template-select').val();
                     $modal.find('#tbw-template-edit-name').val(templates[idx].name);
@@ -100,12 +176,24 @@
                 $modal.find('#tbw-template-select').on('change', updateNameField);
                 updateNameField();
 
+                // Show new name input when button is clicked
+                $modal.find('#tbw-change-name-btn').on('click', function() {
+                    $modal.find('#tbw-new-name-row').show();
+                    $modal.find('#tbw-template-edit-name').focus();
+                    $(this).hide();
+                });
+
                 $modal.on('tbwconfirm', function () {
                     var idx = $modal.find('#tbw-template-select').val();
-                    var newName = $modal.find('#tbw-template-edit-name').val().trim();
-                    if (!newName) {
-                        alert("Template name is required.");
-                        return false;
+                    var newName;
+                    if ($modal.find('#tbw-new-name-row').is(':visible')) {
+                        newName = $modal.find('#tbw-template-edit-name').val().trim();
+                        if (!newName) {
+                            alert("Template name is required.");
+                            return false;
+                        }
+                    } else {
+                        newName = templates[idx].name;
                     }
                     var htmlContent = trumbowyg.html();
                     templates[idx] = {
@@ -113,9 +201,6 @@
                         html: htmlContent
                     };
                     localStorage.setItem('trumbowygTemplates', JSON.stringify(templates));
-                    if (typeof saveJSONToFile === 'function') {
-                        saveJSONToFile(templates, 'myTemplatePlus-' + (window.moment ? moment() : Date.now()) + '.json');
-                    }
                     alert('Template updated!');
                     trumbowyg.$ed.trumbowyg('closeModal');
                 });
@@ -125,20 +210,27 @@
                 });
             },
             hasIcon: false,
-            text: 'Edit Template'
+            text: 'Update Template'
         };
     }
 
     // Delete Template button
-    function deleteTemplatePlusBtn(trumbowyg) {
+    function deleteTemplateOptionsBtn(trumbowyg) {
         return {
             fn: function () {
                 var templates = JSON.parse(localStorage.getItem('trumbowygTemplates') || '[]');
                 if (!templates.length) return alert('No templates to delete.');
+                var modalContent = `
+                    <div style="font-size:0.85em;color:#888;margin-bottom:8px;">
+                        This will permanently remove the selected template.
+                    </div>
+                    <p>Select a template to delete: <select id="tbw-template-delete-select" style="width:90%">${options}</select></p>
+                `;
+
                 var options = buildTemplateOptions(templates);
                 var $modal = trumbowyg.$ed.trumbowyg('openModal', {
                     title: 'Delete Template',
-                    content: '<p>Select template to delete: <select id="tbw-template-delete-select" style="width:90%">' + options + '</select></p>'
+                    content: modalContent
                 });
 
                 $modal.on('tbwconfirm', function () {
@@ -146,9 +238,6 @@
                     if (!confirm('Delete template "' + templates[idx].name + '"?')) return false;
                     templates.splice(idx, 1);
                     localStorage.setItem('trumbowygTemplates', JSON.stringify(templates));
-                    if (typeof saveJSONToFile === 'function') {
-                        saveJSONToFile(templates, 'myTemplatePlus-' + (window.moment ? moment() : Date.now()) + '.json');
-                    }
                     alert('Template deleted!');
                     trumbowyg.$ed.trumbowyg('closeModal');
                 });
@@ -162,21 +251,50 @@
         };
     }
 
-    // Register plugin in Trumbowyg
-    $.extend(true, $.trumbowyg, {
-        plugins: {
-            templateplus: {
-                init: function (trumbowyg) {
-                    trumbowyg.addBtnDef('templateplus', {
-                        dropdown: templatePlusSelector(trumbowyg),
-                        hasIcon: false,
-                        text: trumbowyg.lang.templateplus
-                    });
-                    trumbowyg.addBtnDef('saveTemplatePlus', saveTemplatePlusBtn(trumbowyg));
-                    trumbowyg.addBtnDef('editTemplatePlus', editTemplatePlusBtn(trumbowyg));
-                    trumbowyg.addBtnDef('deleteTemplatePlus', deleteTemplatePlusBtn(trumbowyg));
-                }
-            }
-        }
-    });
+    // Backup Templates button
+    function backupTemplatesOptionsBtn(trumbowyg) {
+        return {
+            fn: function () {
+                // Default filename: YYYYMMDD-HHMMSS.json
+                var now = new Date();
+                var pad = n => n < 10 ? '0' + n : n;
+                var defaultName = now.getFullYear().toString() +
+                    pad(now.getMonth() + 1) +
+                    pad(now.getDate()) + '-' +
+                    pad(now.getHours()) +
+                    pad(now.getMinutes()) +
+                    pad(now.getSeconds()) + '.json';
+                var modalContent = `
+                    <div style="font-size:0.85em;color:#888;margin-bottom:8px;">
+                        This will download all templates as a JSON file.
+                    </div>
+                    <p>File name: <input type="text" id="tbw-backup-filename" style="width: 90%" value="${defaultName}"></p>
+                `;
+
+                var $modal = trumbowyg.$ed.trumbowyg('openModal', {
+                    title: 'Backup Templates',
+                    content: modalContent
+                });
+
+                $modal.on('tbwconfirm', function () {
+                    var filename = $modal.find('#tbw-backup-filename').val().trim() || defaultName;
+                    var templates = JSON.parse(localStorage.getItem('trumbowygTemplates') || '[]');
+                    var blob = new Blob([JSON.stringify(templates, null, 2)], {type: "application/json"});
+                    var a = document.createElement('a');
+                    a.href = URL.createObjectURL(blob);
+                    a.download = filename;
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    trumbowyg.$ed.trumbowyg('closeModal');
+                });
+
+                $modal.on('tbwcancel', function () {
+                    trumbowyg.$ed.trumbowyg('closeModal');
+                });
+            },
+            hasIcon: false,
+            text: 'Backup Templates'
+        };
+    }
 })(jQuery);
