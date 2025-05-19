@@ -218,7 +218,7 @@
         return {
             fn: function () {
                 var templates = JSON.parse(localStorage.getItem('trumbowygTemplates') || '[]');
-                var options = buildTemplateOptions(templates); // <-- Move this line up!
+                var options = buildTemplateOptions(templates); 
                 if (!templates.length) return alert('No templates to delete.');
                 var modalContent = `
                     <div style="font-size:0.85em;color:#888;margin-bottom:8px;">
