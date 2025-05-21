@@ -77,7 +77,7 @@
 
     // Template selector for dropdown (if needed elsewhere)
     function templateOptionsSelector(trumbowyg) {
-        var templates = JSON.parse(localStorage.getItem('trumbowygTemplates') || '[]');
+        var templates = JSON.parse(localStorage.getItem('myTemplateSave') || '[]');
         var dropdown = [];
         templates.forEach(function(template, idx) {
             var btnName = 'templateoptions_' + idx;
@@ -116,13 +116,13 @@
                         return false;
                     }
                     var htmlContent = editorContent;
-                    var templates = JSON.parse(localStorage.getItem('trumbowygTemplates') || '[]');
+                    var templates = JSON.parse(localStorage.getItem('myTemplateSave') || '[]');
                     var newTemplate = {
                         name: templateName,
                         html: htmlContent
                     };
                     templates.push(newTemplate);
-                    localStorage.setItem('trumbowygTemplates', JSON.stringify(templates));
+                    localStorage.setItem('myTemplateSave', JSON.stringify(templates));
                     alert('Template saved!');
                     trumbowyg.$ed.trumbowyg('closeModal');
                 });
@@ -140,7 +140,7 @@
     function editTemplateOptionsBtn(trumbowyg) {
         return {
             fn: function () {
-                var templates = JSON.parse(localStorage.getItem('trumbowygTemplates') || '[]');
+                var templates = JSON.parse(localStorage.getItem('myTemplateSave') || '[]');
                 if (!templates.length) return alert('No templates to edit.');
                 var options = buildTemplateOptions(templates);
 
@@ -199,7 +199,7 @@
                         name: newName,
                         html: htmlContent
                     };
-                    localStorage.setItem('trumbowygTemplates', JSON.stringify(templates));
+                    localStorage.setItem('myTemplateSave', JSON.stringify(templates));
                     alert('Template updated!');
                     trumbowyg.$ed.trumbowyg('closeModal');
                 });
@@ -217,7 +217,7 @@
     function deleteTemplateOptionsBtn(trumbowyg) {
         return {
             fn: function () {
-                var templates = JSON.parse(localStorage.getItem('trumbowygTemplates') || '[]');
+                var templates = JSON.parse(localStorage.getItem('myTemplateSave') || '[]');
                 var options = buildTemplateOptions(templates); 
                 if (!templates.length) return alert('No templates to delete.');
                 var modalContent = `
@@ -236,7 +236,7 @@
                     var idx = $modal.find('#tbw-template-delete-select').val();
                     if (!confirm('Delete template "' + templates[idx].name + '"?')) return false;
                     templates.splice(idx, 1);
-                    localStorage.setItem('trumbowygTemplates', JSON.stringify(templates));
+                    localStorage.setItem('myTemplateSave', JSON.stringify(templates));
                     alert('Template deleted!');
                     trumbowyg.$ed.trumbowyg('closeModal');
                 });
@@ -277,7 +277,7 @@
 
                 $modal.on('tbwconfirm', function () {
                     var filename = $modal.find('#tbw-backup-filename').val().trim() || defaultName;
-                    var templates = JSON.parse(localStorage.getItem('trumbowygTemplates') || '[]');
+                    var templates = JSON.parse(localStorage.getItem('myTemplateSave') || '[]');
                     var blob = new Blob([JSON.stringify(templates, null, 2)], {type: "application/json"});
                     var a = document.createElement('a');
                     a.href = URL.createObjectURL(blob);
