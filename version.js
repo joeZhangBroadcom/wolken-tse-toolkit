@@ -1,1 +1,1 @@
-const latestVersion = "3.1.3";
+const latestVersion = "3.1.5";
