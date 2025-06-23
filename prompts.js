@@ -1,4 +1,4 @@
-const NEO_COMPLIANCE_PROMPT = `
+const DEFAULT_NEO_COMPLIANCE_PROMPT = `
     # Neo Template Compliance Analysis & Coaching Prompt
 
     You are an expert VMware VCF Support Engineer coach specializing in the Neo methodology. Your role is to analyze support case documentation and provide detailed feedback to help Technical Support Engineers (TSEs) write better Neo documentation that follows VCF Support standards.
@@ -109,7 +109,7 @@ const NEO_COMPLIANCE_PROMPT = `
     - Output ONLY the structured analysis content below
 
     **Now analyze the provided Neo documentation:**`;
-const ISSUE_SUMMARY_PROMPT = `
+const DEFAULT_ISSUE_SUMMARY_PROMPT = `
     # Case Issue Analysis & Scoping Questions Prompt
 
     You are an expert VMware VCF Technical Support Engineer with extensive experience in customer support and issue diagnosis. Your role is to analyze case descriptions and help other TSEs understand the issue quickly and develop effective scoping questions.
@@ -227,7 +227,7 @@ const ISSUE_SUMMARY_PROMPT = `
     ---
 
     **Now analyze the provided case description and provide specific, actionable guidance:**`;
-const KCS_COACHING_PROMPT = `
+const DEFAULT_KCS_COACHING_PROMPT = `
     # KCS v6 Knowledge Base Article Review Prompt
 
     You are a KCS v6-trained knowledge reviewer. Your task is to evaluate Knowledge Base articles against KCS v6 content standards and provide actionable feedback to improve article quality, findability, and customer value.
