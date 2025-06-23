@@ -3931,3 +3931,29 @@
         transform: rotate(360deg);
     }
 }
+
+.prompts-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.prompts-status {
+    font-size: 0.875rem;
+    color: #6b7280;
+    font-weight: 500;
+}
+
+#aiPromptsSection {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #e5e7eb;
+}
+
+.setting-box-dark-mode #aiPromptsSection {
+    border-top-color: #374151;
+}
+
+.setting-box-dark-mode .prompts-status {
+    color: #9ca3af;
+}
