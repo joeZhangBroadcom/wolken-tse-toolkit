@@ -1038,7 +1038,7 @@
     width: 90vw;
     max-width: 600px;
     max-height: 85vh;
-    overflow-y: auto;
+    overflow: hidden;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
     z-index: 10003;
     display: none;
@@ -1144,7 +1144,6 @@
     font-size: 13px;
     line-height: 1.5;
     max-height: 350px;
-    /* CHANGED: from 200px to 350px */
     overflow-y: auto;
 }
 
