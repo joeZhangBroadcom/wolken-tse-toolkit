@@ -1130,7 +1130,6 @@
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.8);
-    /* Only the backdrop should have opacity */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1139,16 +1138,15 @@
 
 .cropper-container {
     background: white;
-    /* Solid white background */
     border-radius: 12px;
     padding: 24px;
     width: 600px;
+    /* Increased from 450px */
     max-width: 90vw;
+    /* Responsive on small screens */
     box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
     position: relative;
     z-index: 100011;
-    opacity: 1 !important;
-    /* Ensure full opacity */
 }
 
 .cropper-header {
@@ -1158,9 +1156,6 @@
     margin-bottom: 20px;
     padding-bottom: 16px;
     border-bottom: 1px solid #e5e7eb;
-    background: white;
-    /* Ensure white background */
-    opacity: 1 !important;
 }
 
 .cropper-header h3 {
@@ -1168,7 +1163,6 @@
     font-size: 18px;
     font-weight: 600;
     color: #1f2937;
-    opacity: 1 !important;
 }
 
 .cropper-header .close-btn {
@@ -1185,7 +1179,6 @@
     justify-content: center;
     border-radius: 6px;
     transition: all 0.2s;
-    opacity: 1 !important;
 }
 
 .cropper-header .close-btn:hover {
@@ -1195,6 +1188,7 @@
 
 .cropper-body {
     height: 400px;
+    /* Increased from 300px */
     width: 100%;
     overflow: hidden;
     display: flex;
@@ -1203,14 +1197,12 @@
     background: #f9fafb;
     border-radius: 8px;
     position: relative;
-    opacity: 1 !important;
 }
 
 .cropper-body img {
     max-width: 100%;
     max-height: 100%;
     display: block;
-    opacity: 1 !important;
 }
 
 .cropper-footer {
@@ -1220,8 +1212,6 @@
     margin-top: 20px;
     padding-top: 16px;
     border-top: 1px solid #e5e7eb;
-    background: white;
-    opacity: 1 !important;
 }
 
 .cropper-footer button {
@@ -1232,7 +1222,6 @@
     cursor: pointer;
     transition: all 0.2s;
     border: none;
-    opacity: 1 !important;
 }
 
 .cropper-footer .modern-btn.secondary {
@@ -1253,26 +1242,18 @@
     background: #2563eb;
 }
 
-/* Ensure cropper.js internal elements are fully opaque */
+/* Ensure cropper.js styles work well within our container */
 .cropper-container .cropper-container {
     background: transparent !important;
-    opacity: 1 !important;
 }
 
 .cropper-modal .cropper-view-box {
     outline: 1px solid #3b82f6;
-    opacity: 1 !important;
 }
 
 .cropper-modal .cropper-line,
 .cropper-modal .cropper-point {
     background-color: #3b82f6;
-    opacity: 1 !important;
-}
-
-/* Ensure all child elements are fully opaque */
-.cropper-container * {
-    opacity: 1 !important;
 }
 
 /* Ensure proper spacing in settings modal */
