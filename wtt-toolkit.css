@@ -1242,20 +1242,6 @@
     background: #2563eb;
 }
 
-/* Ensure cropper.js styles work well within our container */
-.cropper-container .cropper-container {
-    background: transparent !important;
-}
-
-.cropper-modal .cropper-view-box {
-    outline: 1px solid #3b82f6;
-}
-
-.cropper-modal .cropper-line,
-.cropper-modal .cropper-point {
-    background-color: #3b82f6;
-}
-
 /* Ensure proper spacing in settings modal */
 .setting-row {
     display: flex;
