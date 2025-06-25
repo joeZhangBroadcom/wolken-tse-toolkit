@@ -1088,6 +1088,7 @@
     object-fit: cover;
     border: 2px solid #e0e0e0;
 }
+
 .user-icon-placeholder {
     width: 80px;
     height: 80px;
@@ -3288,4 +3289,21 @@
         transform: scale(1.02);
         box-shadow: 0 0 20px rgba(255, 107, 0, 0.8);
     }
+}
+
+.sam-indicator {
+    display: inline-block;
+    background-color: #4CAF50;
+    color: white;
+    font-size: 10px;
+    font-weight: bold;
+    padding: 2px 4px;
+    border-radius: 3px;
+    margin-left: 5px;
+    vertical-align: middle;
+    cursor: help;
+}
+
+.sam-indicator:hover {
+    background-color: #45a049;
 }
