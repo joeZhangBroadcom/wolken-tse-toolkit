@@ -30,6 +30,32 @@
     font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
+.message {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 16px;
+    animation: fadeIn 0.3s ease;
+}
+
+.message-content-wrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.message.user {
+    flex-direction: row-reverse;
+}
+
+.message.user .message-content-wrapper {
+    align-items: flex-end;
+}
+
+.message.assistant .message-content-wrapper {
+    align-items: flex-start;
+}
+
 .kcs-coaching-header {
     background: linear-gradient(135deg, #9c27b0, #673ab7);
     color: white;
@@ -1040,6 +1066,120 @@
         opacity: 0.95;
         transform: translateY(0);
     }
+}
+
+.user-icon-upload-container {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.user-icon-preview-container {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid #e0e0e0;
+    position: relative;
+    background: #f5f5f5;
+}
+
+.user-icon-preview {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.user-icon-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    color: #999;
+}
+
+.user-icon-actions {
+    display: flex;
+    gap: 8px;
+    flex-direction: column;
+}
+
+.remove-icon-btn {
+    background: #e53935;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+/* Cropper Modal */
+.cropper-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10005;
+}
+
+.cropper-container {
+    background: white;
+    border-radius: 8px;
+    padding: 20px;
+    max-width: 600px;
+    width: 90%;
+    max-height: 80vh;
+}
+
+.cropper-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.cropper-body {
+    max-height: 400px;
+    overflow: hidden;
+}
+
+.cropper-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-top: 16px;
+}
+
+/* Chat message user icon */
+.message-user-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    overflow: hidden;
+    flex-shrink: 0;
+    background: #f0f0f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.message-user-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.message-user-icon .default-icon {
+    font-size: 18px;
+    color: #666;
 }
 
 .neo-compliance-result.auto-display:hover {
