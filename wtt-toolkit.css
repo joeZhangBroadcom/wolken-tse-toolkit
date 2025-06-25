@@ -1129,7 +1129,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.8);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1139,43 +1139,64 @@
 .cropper-container {
     background: white;
     border-radius: 12px;
-    padding: 20px;
-    width: 450px;
-    /* Fixed width instead of 90% */
-    max-width: 450px;
-    max-height: 500px;
-    /* Smaller max height */
+    padding: 24px;
+    width: 600px;
+    /* Increased from 450px */
+    max-width: 90vw;
+    /* Responsive on small screens */
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
     position: relative;
     z-index: 100011;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
 
 .cropper-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 16px;
-    padding-bottom: 12px;
-    border-bottom: 1px solid #e0e0e0;
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #e5e7eb;
 }
 
 .cropper-header h3 {
     margin: 0;
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 600;
-    color: #333;
+    color: #1f2937;
+}
+
+.cropper-header .close-btn {
+    background: none;
+    border: none;
+    font-size: 28px;
+    cursor: pointer;
+    color: #6b7280;
+    padding: 0;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    transition: all 0.2s;
+}
+
+.cropper-header .close-btn:hover {
+    background: #f3f4f6;
+    color: #1f2937;
 }
 
 .cropper-body {
-    height: 300px;
-    /* Fixed height instead of max-height */
+    height: 400px;
+    /* Increased from 300px */
+    width: 100%;
     overflow: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #f8f9fa;
+    background: #f9fafb;
     border-radius: 8px;
-    border: 1px solid #e0e0e0;
+    position: relative;
 }
 
 .cropper-body img {
@@ -1188,68 +1209,51 @@
     display: flex;
     justify-content: flex-end;
     gap: 12px;
-    margin-top: 16px;
-    padding-top: 12px;
-    border-top: 1px solid #e0e0e0;
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 1px solid #e5e7eb;
 }
 
-.cropper-header .close-btn {
-    background: none;
-    border: none;
-    font-size: 20px;
-    cursor: pointer;
-    color: #666;
-    padding: 4px;
-    width: 28px;
-    height: 28px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 4px;
-}
-
-.cropper-header .close-btn:hover {
-    color: #333;
-    background: #f0f0f0;
-}
-
-/* Make cropper buttons smaller and consistent */
-.cropper-footer .modern-btn {
-    padding: 8px 16px;
-    font-size: 14px;
+.cropper-footer button {
+    padding: 8px 20px;
     border-radius: 6px;
-    border: none;
-    cursor: pointer;
+    font-size: 14px;
     font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: none;
 }
 
 .cropper-footer .modern-btn.secondary {
-    background: #f8f9fa;
-    color: #666;
-    border: 1px solid #e0e0e0;
+    background: #f3f4f6;
+    color: #374151;
 }
 
 .cropper-footer .modern-btn.secondary:hover {
-    background: #e9ecef;
+    background: #e5e7eb;
 }
 
 .cropper-footer .modern-btn.primary {
-    background: #007bff;
+    background: #3b82f6;
     color: white;
 }
 
 .cropper-footer .modern-btn.primary:hover {
-    background: #0056b3;
+    background: #2563eb;
 }
 
-/* Override cropper.js default styles to fit our container */
-.cropper-container .cropper-canvas,
-.cropper-container .cropper-crop-box {
-    border-radius: 4px;
+/* Ensure cropper.js styles work well within our container */
+.cropper-container .cropper-container {
+    background: transparent !important;
 }
 
-.cropper-container .cropper-view-box {
-    outline: 1px solid rgba(51, 153, 255, 0.75);
+.cropper-modal .cropper-view-box {
+    outline: 1px solid #3b82f6;
+}
+
+.cropper-modal .cropper-line,
+.cropper-modal .cropper-point {
+    background-color: #3b82f6;
 }
 
 /* Ensure proper spacing in settings modal */
