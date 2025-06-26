@@ -3485,3 +3485,36 @@
 .modern-sidebar.dark-mode .analyze-case-btn:hover:not(:disabled) {
     box-shadow: 0 8px 20px rgba(102, 126, 234, 0.5);
 }
+
+.delete-all-chats-btn {
+    width: 100%;
+    padding: 8px 12px;
+    margin-bottom: 12px;
+    background: #ef4444;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+}
+
+.delete-all-chats-btn:hover {
+    background: #dc2626;
+    transform: translateY(-1px);
+}
+
+.delete-all-chats-btn:active {
+    transform: translateY(0);
+}
+
+.delete-all-chats-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
