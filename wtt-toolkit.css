@@ -3378,45 +3378,51 @@
     border-top: 1px solid #e5e7eb;
     background: rgba(255, 255, 255, 0.02);
     backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .analyze-case-btn {
-    width: 100%;
+    /* CHANGED: Remove width: 100% and make it compact */
     background: linear-gradient(135deg, #667eea, #764ba2);
     color: white;
     border: none;
-    border-radius: 12px;
-    padding: 14px 20px;
+    border-radius: 24px;
+    padding: 8px 20px;
+    margin: 0;
     font-size: 14px;
     font-weight: 500;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 10px;
-    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.25);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    gap: 8px;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+    transition: all 0.3s ease;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     position: relative;
     overflow: hidden;
+    z-index: 10;
+    /* ADDED: Center within the flex container */
+    align-self: center;
 }
 
 .analyze-case-btn:hover:not(:disabled) {
     transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.35);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
     background: linear-gradient(135deg, #5a67d8, #6b46c1);
 }
 
 .analyze-case-btn:active:not(:disabled) {
     transform: translateY(-1px);
-    box-shadow: 0 6px 16px rgba(102, 126, 234, 0.3);
+    box-shadow: 0 4px 16px rgba(102, 126, 234, 0.3);
 }
 
 .analyze-case-btn:disabled {
-    opacity: 0.6;
+    opacity: 0.7;
     cursor: not-allowed;
     transform: none;
-    box-shadow: 0 2px 6px rgba(102, 126, 234, 0.15);
 }
 
 .analyze-case-btn svg {
@@ -3430,8 +3436,8 @@
 
 /* Loading spinner for analyze button */
 .analyze-case-btn .spinner-small {
-    width: 18px;
-    height: 18px;
+    width: 16px;
+    height: 16px;
     border: 2px solid rgba(255, 255, 255, 0.3);
     border-top-color: white;
     border-radius: 50%;
