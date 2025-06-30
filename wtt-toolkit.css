@@ -989,8 +989,7 @@
 }
 
 /* UPDATED: Larger case information section */
-.case-form-case-summary,
-#swarmCaseSummary {
+.case-form-case-summary {
     background: #f8fafc;
     border: 1px solid #e5e7eb;
     border-radius: 8px;
