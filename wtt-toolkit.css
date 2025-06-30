@@ -880,7 +880,8 @@
     display: none;
 }
 
-#caseManagerFormContainer {
+#caseManagerFormContainer,
+#SwarmFormContainer {
     position: fixed;
     top: 50%;
     left: 50%;
@@ -916,7 +917,7 @@
     gap: 12px;
 }
 
-.case-form-close-btn{
+.case-form-close-btn {
     background: rgba(255, 255, 255, 0.2);
     border: none;
     color: white;
@@ -939,18 +940,18 @@
     padding: 24px;
 }
 
-.case-form-section{
+.case-form-section {
     margin-bottom: 24px;
 }
 
-.case-form-section h3{
+.case-form-section h3 {
     margin: 0 0 12px 0;
     font-size: 16px;
     font-weight: 600;
     color: #374151;
 }
 
-.case-form-group{
+.case-form-group {
     margin-bottom: 16px;
 }
 
@@ -963,7 +964,7 @@
 }
 
 .case-form-group textarea,
-.case-form-group select{
+.case-form-group select {
     width: 100%;
     padding: 12px;
     border: 1px solid #d1d5db;
