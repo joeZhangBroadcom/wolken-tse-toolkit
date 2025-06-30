@@ -1052,6 +1052,24 @@
     transform: none !important;
 }
 
+/* Swarm Form Header - Orange Theme */
+#swarmFormContainer .swarm-form-header {
+    background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
+    color: white;
+    padding: 20px 24px;
+    border-radius: 16px 16px 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+#swarmFormContainer .swarm-form-header h2 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 600;
+}
+
 .neo-compliance-result.auto-display {
     animation: neo-auto-fade-in 0.8s ease-out;
 }
