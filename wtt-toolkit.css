@@ -1016,7 +1016,7 @@
     gap: 12px;
 }
 
-.case-btn {
+.case-form-btn {
     padding: 10px 20px;
     border-radius: 8px;
     font-size: 14px;
@@ -1026,27 +1026,27 @@
     transition: all 0.2s ease;
 }
 
-.case-btn.primary {
+.case-form-btn.primary {
     background: #667eea;
     color: white;
 }
 
-.case-btn.primary:hover:not(:disabled) {
+.case-form-btn.primary:hover:not(:disabled) {
     background: #5b6cda;
     transform: translateY(-1px);
 }
 
-.case-btn.secondary {
+.case-form-btn.secondary {
     background: #f3f4f6;
     color: #374151;
     border: 1px solid #d1d5db;
 }
 
-.case-btn.secondary:hover {
+.case-form-btn.secondary:hover {
     background: #e5e7eb;
 }
 
-.case-btn:disabled {
+.case-form-btn:disabled {
     opacity: 0.5;
     cursor: not-allowed;
     transform: none !important;
