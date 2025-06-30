@@ -868,7 +868,7 @@
     margin: 2em 0;
 }
 
-.case-manager-form-backdrop {
+.case-form-backdrop {
     position: fixed;
     top: 0;
     left: 0;
@@ -907,7 +907,7 @@
     justify-content: space-between;
 }
 
-.case-manager-form-header h2 {
+.case-form-header h2 {
     margin: 0;
     font-size: 20px;
     font-weight: 600;
@@ -916,7 +916,7 @@
     gap: 12px;
 }
 
-.case-manager-close-btn {
+.case-form-close-btn{
     background: rgba(255, 255, 255, 0.2);
     border: none;
     color: white;
@@ -931,30 +931,30 @@
     transition: background 0.2s ease;
 }
 
-.case-manager-close-btn:hover {
+.case-form-close-btn:hover {
     background: rgba(255, 255, 255, 0.3);
 }
 
-.case-manager-form-body {
+.case-form-body {
     padding: 24px;
 }
 
-.case-manager-form-section {
+.case-form-section{
     margin-bottom: 24px;
 }
 
-.case-manager-form-section h3 {
+.case-form-section h3{
     margin: 0 0 12px 0;
     font-size: 16px;
     font-weight: 600;
     color: #374151;
 }
 
-.case-manager-form-group {
+.case-form-group{
     margin-bottom: 16px;
 }
 
-.case-manager-form-group label {
+.case-form-group label {
     display: block;
     margin-bottom: 6px;
     font-size: 14px;
@@ -962,8 +962,8 @@
     color: #374151;
 }
 
-.case-manager-form-group textarea,
-.case-manager-form-group select {
+.case-form-group textarea,
+.case-form-group select{
     width: 100%;
     padding: 12px;
     border: 1px solid #d1d5db;
@@ -975,13 +975,13 @@
     box-sizing: border-box;
 }
 
-.case-manager-form-group select {
+.case-form-group select {
     min-height: auto;
     height: 44px;
 }
 
-.case-manager-form-group textarea:focus,
-.case-manager-form-group select:focus {
+.case-form-group textarea:focus,
+.case-form-group select:focus {
     outline: none;
     border-color: #667eea;
     box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
@@ -1006,7 +1006,7 @@
     gap: 8px;
 }
 
-.case-manager-form-footer {
+.case-form-footer {
     padding: 20px 24px;
     border-top: 1px solid #e5e7eb;
     background: #f9fafb;
@@ -1016,7 +1016,7 @@
     gap: 12px;
 }
 
-.case-manager-btn {
+.case-btn {
     padding: 10px 20px;
     border-radius: 8px;
     font-size: 14px;
@@ -1026,27 +1026,27 @@
     transition: all 0.2s ease;
 }
 
-.case-manager-btn.primary {
+.case-btn.primary {
     background: #667eea;
     color: white;
 }
 
-.case-manager-btn.primary:hover:not(:disabled) {
+.case-btn.primary:hover:not(:disabled) {
     background: #5b6cda;
     transform: translateY(-1px);
 }
 
-.case-manager-btn.secondary {
+.case-btn.secondary {
     background: #f3f4f6;
     color: #374151;
     border: 1px solid #d1d5db;
 }
 
-.case-manager-btn.secondary:hover {
+.case-btn.secondary:hover {
     background: #e5e7eb;
 }
 
-.case-manager-btn:disabled {
+.case-btn:disabled {
     opacity: 0.5;
     cursor: not-allowed;
     transform: none !important;
@@ -1062,7 +1062,7 @@
 }
 
 /* Swarm-specific header styling using unified structure */
-#swarmFormContainer .case-manager-form-header {
+.swarm-form-header {
     background: linear-gradient(135deg, var(--swarm-primary) 0%, var(--swarm-secondary) 100%);
     color: white;
     padding: 20px 24px;
@@ -1071,25 +1071,6 @@
     justify-content: space-between;
     align-items: center;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
-
-#swarmFormContainer .case-manager-form-header h2 {
-    margin: 0;
-    font-size: 20px;
-    font-weight: 600;
-}
-
-/* Swarm backdrop - keep higher z-index for compatibility */
-.swarm-form-backdrop {
-    position: fixed !important;
-    top: 0 !important;
-    left: 0 !important;
-    width: 100vw !important;
-    height: 100vh !important;
-    background: rgba(0, 0, 0, 0.5) !important;
-    backdrop-filter: blur(4px);
-    z-index: 99999 !important;
-    display: none;
 }
 
 .neo-compliance-result.auto-display {
@@ -1423,62 +1404,6 @@
 .issue-summary-result.auto-display:hover {
     opacity: 1 !important;
     transition: opacity 0.2s ease;
-}
-
-/* Remove the old custom styling and animation */
-.swarm-button::before {
-    display: none;
-}
-
-.swarm-button .mat-button-wrapper {
-    padding-left: 0;
-    /* Remove custom padding */
-}
-
-/* Keep the form styling but remove button custom styles */
-
-
-
-
-.swarm-case-summary {
-    background: #f8f9fa;
-    border: 1px solid #e9ecef;
-    border-radius: 4px;
-    padding: 12px;
-    margin-bottom: 16px;
-    font-size: 13px;
-    max-height: 400px;
-    overflow-y: auto;
-}
-
-.swarm-case-summary .case-detail {
-    margin-bottom: 6px;
-}
-
-.swarm-case-summary .case-detail strong {
-    color: #495057;
-    min-width: 120px;
-    display: inline-block;
-    vertical-align: top;
-}
-
-.swarm-case-summary .issue-summary-section,
-.swarm-case-summary .technical-context-section {
-    margin-top: 12px;
-    padding-top: 12px;
-    border-top: 1px solid #dee2e6;
-}
-
-.swarm-case-summary .section-title {
-    font-weight: 600;
-    color: #ff6b35;
-    margin-bottom: 8px;
-    font-size: 14px;
-}
-
-.swarm-case-summary .section-content {
-    margin-left: 16px;
-    line-height: 1.5;
 }
 
 
