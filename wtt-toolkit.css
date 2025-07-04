@@ -1,16 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
-.kcs-coaching-backdrop {
-    position: fixed !important;
-    top: 0 !important;
-    left: 0 !important;
-    width: 100vw !important;
-    height: 100vh !important;
-    background: rgba(0, 0, 0, 0.5) !important;
-    z-index: 99999 !important;
-    display: none;
-}
-
 .kcs-coaching-container {
     position: fixed !important;
     top: 50% !important;
@@ -868,20 +857,155 @@
     margin: 2em 0;
 }
 
-.case-form-backdrop {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(4px);
-    z-index: 10002;
-    display: none;
+.modal-wrapper {
+    z-index: 10003 !important;
+}
+
+.modal-wrapper .modal-backdrop {
+    z-index: 10002 !important;
+}
+
+.modal-wrapper #swarmFormContainer,
+.modal-wrapper #caseManagerFormContainer,
+.modal-wrapper #ruleBuilderFormContainer {
+    z-index: 10003 !important;
+}
+
+/* Rule Builder Form Input Styling */
+.case-form-group input[type="text"],
+.case-form-group input[type="number"],
+.case-form-group input[type="date"],
+.case-form-group input[type="color"] {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 14px;
+    font-family: inherit;
+    box-sizing: border-box;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.case-form-group input[type="text"]:focus,
+.case-form-group input[type="number"]:focus,
+.case-form-group input[type="date"]:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+/* Color input specific styling */
+.case-form-group input[type="color"] {
+    width: 50px;
+    height: 40px;
+    padding: 2px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.case-form-group input[type="color"]:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+/* Checkbox styling */
+.case-form-group input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    margin-right: 8px;
+    accent-color: #667eea;
+    cursor: pointer;
+}
+
+/* Rule builder specific input containers */
+#ruleBuilderFormContainer .case-form-group {
+    margin-bottom: 16px;
+}
+
+#ruleBuilderFormContainer .case-form-group label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #374151;
+}
+
+/* Grid layout for color inputs */
+#ruleBuilderFormContainer .case-form-group div[style*="display: flex"] {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+}
+
+#ruleBuilderFormContainer .case-form-group div[style*="display: flex"] input[type="text"] {
+    flex: 1 !important;
+}
+
+/* Preview styling */
+#stylePreview {
+    padding: 8px 12px !important;
+    border: 1px solid #ddd !important;
+    border-radius: 4px !important;
+    text-align: center !important;
+    font-size: 14px !important;
+    font-weight: normal !important;
+    min-height: 40px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+/* Rule builder modal wrapper z-index */
+#ruleBuilderWrapper {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    z-index: 100020 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background: rgba(0, 0, 0, 0.5) !important;
+    /* Add backdrop */
+}
+
+/* Small inputs styling */
+#ruleBuilderFormContainer input[type="number"] {
+    width: auto !important;
+    min-width: 80px !important;
+}
+
+/* Condition controls styling */
+#conditionControls .case-form-group {
+    margin-bottom: 12px;
+}
+
+#conditionControls .case-form-group:last-child {
+    margin-bottom: 0;
+}
+
+/* Relative date controls styling */
+#relativeValueGroup {
+    display: flex !important;
+    gap: 8px !important;
+    align-items: end !important;
+}
+
+#relativeValueGroup>div {
+    flex: 1 !important;
+}
+
+#relativeValueGroup input,
+#relativeValueGroup select {
+    width: 100% !important;
 }
 
 #caseManagerFormContainer,
-#swarmFormContainer {
+#swarmFormContainer,
+#ruleBuilderFormContainer {
     position: fixed;
     top: 50%;
     left: 50%;
@@ -890,12 +1014,22 @@
     border-radius: 16px;
     width: 90vw;
     max-width: 600px;
-    max-height: 120vh;
+    max-height: calc(100vh - 200px);
     overflow: hidden;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-    z-index: 10003;
-    display: none;
+    z-index: 100015 !important;
+    /* Increased z-index */
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    /* Flexbox layout for proper header/body/footer structure */
+    display: none;
+}
+
+/* When modal is shown, use flexbox layout */
+#caseManagerFormContainer:not([style*="display: none"]),
+#swarmFormContainer:not([style*="display: none"]),
+#ruleBuilderFormContainer:not([style*="display: none"]) {
+    display: flex !important;
+    flex-direction: column !important;
 }
 
 .case-manager-form-header {
@@ -906,6 +1040,8 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    /* Ensure header doesn't shrink */
+    flex-shrink: 0;
 }
 
 .case-form-header h2 {
@@ -938,6 +1074,10 @@
 
 .case-form-body {
     padding: 24px;
+    /* Make the body scrollable while keeping header/footer fixed */
+    flex: 1;
+    overflow-y: auto;
+    min-height: 0;
 }
 
 .case-form-section {
@@ -1014,6 +1154,8 @@
     border-radius: 0 0 16px 16px;
     display: flex;
     justify-content: flex-end;
+    /* Ensure footer doesn't shrink */
+    flex-shrink: 0;
     gap: 12px;
 }
 
@@ -2099,7 +2241,7 @@
     left: 0;
     width: 100vw;
     height: 100vh;
-    z-index: 10002;
+    z-index: 10005 !important;
     display: none;
     align-items: center;
     justify-content: center;
@@ -2110,14 +2252,14 @@
     display: flex;
 }
 
-.settings-modal-backdrop {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(4px);
+.modal-backdrop {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    background: rgba(0, 0, 0, 0.5) !important;
+    display: none;
 }
 
 .settings-modal-content {
@@ -2132,6 +2274,7 @@
     display: flex;
     flex-direction: column;
     animation: modalSlideIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 10005 !important;
 }
 
 @keyframes modalSlideIn {
@@ -2654,6 +2797,145 @@
     }
 }
 
+/* NEW: Rule builder specific styling */
+.rule-builder-modal-wrapper {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    z-index: 100020 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+.rule-builder-modal-backdrop {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    background: rgba(0, 0, 0, 0.5) !important;
+    z-index: 100019 !important;
+    /* Lower than form container */
+}
+
+/* Rule builder form container with higher z-index */
+.rule-builder-form-container {
+    position: relative !important;
+    z-index: 100025 !important;
+    /* Much higher than backdrop */
+    background: white;
+    border-radius: 16px;
+    width: 90vw;
+    max-width: 600px;
+    max-height: 120vh;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* Rule builder specific form controls */
+.rule-builder-form-container input[type="color"] {
+    position: relative;
+    z-index: 100026 !important;
+    width: 50px;
+    height: 40px;
+    padding: 2px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.rule-builder-form-container input[type="color"]:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.rule-builder-form-container select,
+.rule-builder-form-container .case-form-dropdown-results {
+    position: relative;
+    z-index: 100027 !important;
+}
+
+/* Make sure browser color picker overlays work properly */
+.rule-builder-form-container input[type="color"]::-webkit-color-swatch-wrapper {
+    z-index: 100028 !important;
+}
+
+.rule-builder-form-container input[type="color"]::-webkit-color-swatch {
+    z-index: 100029 !important;
+}
+
+/* Style preview specifically for rule builder */
+.rule-builder-form-container #stylePreview {
+    padding: 8px 12px !important;
+    border: 1px solid #ddd !important;
+    border-radius: 4px !important;
+    text-align: center !important;
+    font-size: 14px !important;
+    font-weight: normal !important;
+    min-height: 40px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+/* Rule builder specific input styling */
+.rule-builder-form-container .case-form-group input[type="text"],
+.rule-builder-form-container .case-form-group input[type="number"],
+.rule-builder-form-container .case-form-group input[type="date"] {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 14px;
+    font-family: inherit;
+    box-sizing: border-box;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.rule-builder-form-container .case-form-group input[type="text"]:focus,
+.rule-builder-form-container .case-form-group input[type="number"]:focus,
+.rule-builder-form-container .case-form-group input[type="date"]:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+/* Rule builder specific number inputs */
+.rule-builder-form-container input[type="number"] {
+    width: auto !important;
+    min-width: 80px !important;
+}
+
+/* Rule builder condition controls */
+.rule-builder-form-container #conditionControls .case-form-group {
+    margin-bottom: 12px;
+}
+
+.rule-builder-form-container #conditionControls .case-form-group:last-child {
+    margin-bottom: 0;
+}
+
+/* Rule builder relative date controls */
+.rule-builder-form-container #relativeValueGroup {
+    display: flex !important;
+    gap: 8px !important;
+    align-items: end !important;
+}
+
+.rule-builder-form-container #relativeValueGroup>div {
+    flex: 1 !important;
+}
+
+.rule-builder-form-container #relativeValueGroup input,
+.rule-builder-form-container #relativeValueGroup select {
+    width: 100% !important;
+}
+
 /* Optional: Small adjustments to match your design system */
 .flatpickr-calendar {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
@@ -2663,7 +2945,7 @@
 
 /* Ensure proper positioning */
 .flatpickr-calendar.open {
-    z-index: 100010 !important;
+    z-index: 100030 !important;
 }
 
 @keyframes pulse-hint {
@@ -3219,4 +3501,872 @@
     opacity: 0.6;
     cursor: not-allowed;
     transform: none;
+}
+
+/* Help Modal Styles */
+.help-modal-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 100010;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.help-modal {
+    background: white;
+    border-radius: 16px;
+    width: 95vw;
+    max-width: 1200px;
+    /* Made much wider */
+    max-height: 95vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    animation: helpModalSlideIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+@keyframes helpModalSlideIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9) translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+.help-modal-header {
+    background: linear-gradient(135deg, #9C27B0 0%, #673AB7 100%);
+    padding: 24px 32px;
+    color: white;
+    border-radius: 16px 16px 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.help-modal-title {
+    margin: 0;
+    font-size: 28px;
+    font-weight: 600;
+}
+
+.help-modal-subtitle {
+    margin: 8px 0 0 0;
+    opacity: 0.9;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.help-modal-close {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    transition: background 0.2s ease;
+}
+
+.help-modal-close:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.help-modal-body {
+    padding: 32px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    /* Two columns for better use of width */
+    gap: 32px;
+}
+
+.help-section {
+    margin-bottom: 32px;
+}
+
+.help-section h3 {
+    color: #333;
+    border-bottom: 3px solid #9C27B0;
+    padding-bottom: 8px;
+    margin: 0 0 20px 0;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.help-quick-start {
+    grid-column: 1 / -1;
+    /* Span full width */
+}
+
+.help-quick-start ol {
+    line-height: 2;
+    font-size: 16px;
+    padding-left: 24px;
+}
+
+.help-examples-grid {
+    display: grid;
+    gap: 16px;
+}
+
+.help-example-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    background: #f9f9f9;
+    transition: all 0.2s ease;
+}
+
+.help-example-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+}
+
+.help-example-title {
+    margin: 0 0 12px 0;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.help-example-title.high-priority {
+    color: #d32f2f;
+}
+
+.help-example-title.overdue {
+    color: #f57c00;
+}
+
+.help-example-title.my-cases {
+    color: #388e3c;
+}
+
+.help-example-title.no-response {
+    color: #1976d2;
+}
+
+.help-example-desc {
+    margin: 0;
+    font-size: 14px;
+    color: #666;
+    line-height: 1.5;
+}
+
+.help-columns-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    font-size: 14px;
+}
+
+.help-column-group {
+    background: #f8f9fa;
+    padding: 16px;
+    border-radius: 8px;
+}
+
+.help-column-group strong {
+    display: block;
+    margin-bottom: 8px;
+    color: #374151;
+}
+
+.help-condition-types {
+    display: grid;
+    gap: 16px;
+}
+
+.help-condition-type h4 {
+    margin: 0 0 8px 0;
+    color: #1976d2;
+    font-size: 16px;
+}
+
+.help-condition-type p {
+    margin: 0;
+    font-size: 14px;
+    color: #666;
+    line-height: 1.5;
+}
+
+.help-tips-list {
+    line-height: 1.8;
+    font-size: 14px;
+    padding-left: 20px;
+}
+
+.help-tips-list li {
+    margin-bottom: 8px;
+}
+
+.help-tips-list strong {
+    color: #374151;
+}
+
+.help-console-commands {
+    background: #f5f5f5;
+    border-radius: 8px;
+    padding: 16px;
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.help-command {
+    margin-bottom: 8px;
+    color: #374151;
+}
+
+.help-command-name {
+    color: #d32f2f;
+    font-weight: bold;
+}
+
+.help-modal-footer {
+    text-align: center;
+    border-top: 1px solid #eee;
+    padding: 24px 32px;
+    background: #f9fafb;
+    border-radius: 0 0 16px 16px;
+}
+
+.help-close-btn {
+    padding: 12px 32px;
+    background: #9C27B0;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.help-close-btn:hover {
+    background: #7B1FA2;
+    transform: translateY(-2px);
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 1024px) {
+    .help-modal-body {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+
+    .help-columns-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .help-modal {
+        width: 98vw;
+        margin: 1vh;
+    }
+
+    .help-modal-body {
+        padding: 20px;
+    }
+
+    .help-modal-header {
+        padding: 20px 24px;
+    }
+
+    .help-modal-title {
+        font-size: 24px;
+    }
+}
+
+/* Add to your CSS file */
+.multiple-conditions-container {
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 16px;
+    background: #f9fafb;
+    margin-bottom: 16px;
+}
+
+.condition-group {
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    padding: 12px;
+    margin-bottom: 12px;
+    background: white;
+    position: relative;
+}
+
+.condition-group:last-child {
+    margin-bottom: 0;
+}
+
+.condition-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.condition-number {
+    font-weight: 600;
+    color: #374151;
+    font-size: 14px;
+}
+
+.condition-remove-btn {
+    background: #ef4444;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 4px 8px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.condition-remove-btn:hover {
+    background: #dc2626;
+}
+
+.condition-logic-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 12px 0;
+    gap: 12px;
+}
+
+.condition-logic-label {
+    font-size: 14px;
+    font-weight: 500;
+    color: #374151;
+}
+
+.condition-logic-select {
+    padding: 6px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 4px;
+    font-size: 14px;
+    background: white;
+}
+
+.add-condition-btn {
+    background: #10b981;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 16px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.add-condition-btn:hover {
+    background: #059669;
+    transform: translateY(-1px);
+}
+
+.add-condition-btn:disabled {
+    background: #d1d5db;
+    color: #9ca3af;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Fixed toggle styling */
+.modern-toggle input:checked+.toggle-slider {
+    background: #667eea !important;
+}
+
+.modern-toggle input:checked+.toggle-slider:before {
+    transform: translateX(24px) !important;
+}
+
+.modern-rule-enabled {
+    cursor: pointer;
+}
+
+/* Rule builder specific button styling */
+.rule-builder-form-container .case-form-btn {
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s ease;
+}
+
+.rule-builder-form-container .case-form-btn.primary {
+    background: #667eea;
+    color: white;
+}
+
+.rule-builder-form-container .case-form-btn.primary:hover:not(:disabled) {
+    background: #5b6cda;
+    transform: translateY(-1px);
+}
+
+.rule-builder-form-container .case-form-btn.secondary {
+    background: #f3f4f6;
+    color: #374151;
+    border: 1px solid #d1d5db;
+}
+
+.rule-builder-form-container .case-form-btn.secondary:hover {
+    background: #e5e7eb;
+}
+
+.rule-builder-form-container .case-form-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none !important;
+}
+
+/* Rule builder checkbox styling */
+.rule-builder-form-container input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    margin-right: 8px;
+    accent-color: #667eea;
+    cursor: pointer;
+    border: 1px solid #d1d5db;
+    border-radius: 3px;
+}
+
+.rule-builder-form-container input[type="checkbox"]:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+/* Rule builder form group styling */
+.rule-builder-form-container .case-form-group {
+    margin-bottom: 16px;
+}
+
+.rule-builder-form-container .case-form-group label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #374151;
+}
+
+/* Rule builder footer styling */
+.rule-builder-form-container .case-form-footer {
+    padding: 20px 24px;
+    border-top: 1px solid #e5e7eb;
+    background: #f9fafb;
+    border-radius: 0 0 16px 16px;
+    display: flex;
+    justify-content: flex-end;
+    /* Ensure footer doesn't shrink */
+    flex-shrink: 0;
+    gap: 12px;
+}
+
+/* Special styling for enabled checkbox in rule builder */
+.rule-builder-form-container .modern-rule-enabled {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 6px;
+    transition: background 0.2s ease;
+}
+
+.rule-builder-form-container .modern-rule-enabled:hover {
+    background: #f3f4f6;
+}
+
+.rule-builder-form-container .modern-rule-enabled input[type="checkbox"] {
+    margin: 0;
+}
+
+/* Action buttons for condition management */
+.rule-builder-form-container .add-condition-btn {
+    background: #10b981;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 16px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.rule-builder-form-container .add-condition-btn:hover {
+    background: #059669;
+    transform: translateY(-1px);
+}
+
+.rule-builder-form-container .condition-remove-btn {
+    background: #ef4444;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 4px 8px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.rule-builder-form-container .condition-remove-btn:hover {
+    background: #dc2626;
+}
+
+#trumbowygBox {
+    position: fixed;
+    top: 10vh;
+    left: 10vw;
+    background: #fff;
+    border: 1px solid #ccc;
+    padding: 0;
+    z-index: 10000;
+    width: 95vw;
+    max-width: 900px;
+    min-height: 200px;
+    max-height: 90vh;
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25), 0 1.5px 6px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
+    overflow: visible;
+    height: auto;
+}
+
+#trumbowygBox h2 {
+    margin: 0;
+    padding: 12px 18px 6px 18px;
+    font-size: 1.2rem;
+    background: #f7f7f7;
+    border-bottom: 1px solid #eee;
+    text-align: left;
+    font-weight: 600;
+}
+
+#trumbowygIframe {
+    width: 100%;
+    min-height: 350px;
+    height: auto;
+    border: none;
+    background: #fafbfc;
+    display: block;
+    margin: 0;
+    padding: 0;
+    transition: height 0.2s;
+    overflow: visible;
+}
+
+#buttonContainer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 8px 14px;
+    background: #f7f7f7;
+    border-top: 1px solid #eee;
+    gap: 8px;
+    margin: 0;
+}
+
+#buttonContainer button {
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    padding: 7px 14px;
+    font-size: 0.98rem;
+    margin-right: 8px;
+    margin-bottom: 4px;
+    font-weight: 500;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.07);
+    transition: background 0.2s, box-shadow 0.2s;
+}
+
+#insert {
+    background: #7e57c2;
+}
+
+#closeTrumbowyg {
+    background: #e53935;
+}
+
+#buttonContainer button:last-child {
+    margin-right: 0;
+}
+
+#templateInfo {
+    font-size: 0.75rem;
+    color: #888;
+    padding: 2px 12px 6px 12px;
+    margin: 0;
+    border-top: 1px dashed #eee;
+    background: #fafbfc;
+    text-align: left;
+    font-style: italic;
+}
+
+@media (max-width: 700px) {
+    #trumbowygBox {
+        width: 99vw;
+        max-width: 99vw;
+        border-radius: 8px;
+    }
+
+    #trumbowygBox h2 {
+        font-size: 1rem;
+        padding: 8px 8px 4px 8px;
+    }
+
+    #buttonContainer {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 6px;
+        gap: 4px;
+    }
+
+    #buttonContainer button {
+        width: 100%;
+        margin-right: 0;
+    }
+
+    #templateInfo {
+        font-size: 0.7rem;
+        padding: 2px 6px 6px 6px;
+    }
+}
+
+/* AI Summary Overlay Styles */
+.ai-summary-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(2px);
+    z-index: 1000;
+    padding: 20px;
+    border: 2px solid #4285f4;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    display: flex !important;
+    flex-direction: column !important;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+.ai-summary-header {
+    background: linear-gradient(135deg, #4285f4, #34a853);
+    color: white;
+    padding: 12px 16px;
+    margin: -20px -20px 16px -20px;
+    border-radius: 6px 6px 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+}
+
+.ai-summary-title-section {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.ai-summary-icon {
+    font-size: 18px;
+}
+
+.ai-summary-icon img {
+    width: 24px;
+    height: 24px;
+    vertical-align: middle;
+}
+
+.ai-summary-title {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.close-summary-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 4px;
+    line-height: 1;
+    transition: background-color 0.2s ease;
+}
+
+.close-summary-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.ai-summary-content {
+    background: #f8f9fa;
+    padding: 16px;
+    border-radius: 6px;
+    border-left: 4px solid #4285f4;
+    line-height: 1.6;
+    font-size: 14px;
+    color: #333;
+    overflow-y: auto;
+    flex: 1 1 auto;
+    min-height: 0;
+    height: auto;
+}
+
+.ai-summary-footer {
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid #e0e0e0;
+    font-size: 11px;
+    color: #666;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+/* Responsive adjustments for AI summary overlay */
+@media (max-width: 768px) {
+    .ai-summary-overlay {
+        padding: 16px;
+    }
+
+    .ai-summary-header {
+        margin: -16px -16px 12px -16px;
+        padding: 10px 14px;
+    }
+
+    .ai-summary-title {
+        font-size: 15px;
+    }
+
+    .ai-summary-content {
+        padding: 12px;
+        font-size: 13px;
+    }
+}
+
+/* Dark mode support for AI summary overlay */
+.ai-summary-overlay.dark-mode {
+    background: rgba(30, 30, 30, 0.95);
+    border-color: #5a67d8;
+}
+
+.ai-summary-overlay.dark-mode .ai-summary-content {
+    background: #2d3748;
+    color: #e2e8f0;
+    border-left-color: #5a67d8;
+}
+
+.ai-summary-overlay.dark-mode .ai-summary-footer {
+    color: #a0aec0;
+    border-top-color: #4a5568;
+}
+
+/* Rule Builder Checkbox Styling */
+.rule-builder-form-container .case-form-group label[style*="display: flex"] {
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+    cursor: pointer !important;
+    padding: 12px !important;
+    border: 1px solid #e5e7eb !important;
+    border-radius: 8px !important;
+    background: #f9fafb !important;
+    transition: all 0.2s ease !important;
+    margin-bottom: 0 !important;
+}
+
+.rule-builder-form-container .case-form-group label[style*="display: flex"]:hover {
+    background: #f3f4f6 !important;
+    border-color: #d1d5db !important;
+}
+
+.rule-builder-form-container .case-form-group label[style*="display: flex"] input[type="checkbox"] {
+    width: 20px !important;
+    height: 20px !important;
+    margin: 0 !important;
+    accent-color: #667eea !important;
+    cursor: pointer !important;
+    border: 2px solid #d1d5db !important;
+    border-radius: 4px !important;
+    background: white !important;
+    transition: all 0.2s ease !important;
+}
+
+.rule-builder-form-container .case-form-group label[style*="display: flex"] input[type="checkbox"]:checked {
+    background: #667eea !important;
+    border-color: #667eea !important;
+}
+
+.rule-builder-form-container .case-form-group label[style*="display: flex"] input[type="checkbox"]:focus {
+    outline: none !important;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1) !important;
+}
+
+.rule-builder-form-container .case-form-group label[style*="display: flex"] span {
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    color: #374151 !important;
+    user-select: none !important;
+}
+
+/* Alternative: Modern Toggle Style for Rule Builder */
+.rule-builder-checkbox-toggle {
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+    cursor: pointer !important;
+    padding: 12px !important;
+    border: 1px solid #e5e7eb !important;
+    border-radius: 8px !important;
+    background: #f9fafb !important;
+    transition: all 0.2s ease !important;
+    margin-bottom: 16px !important;
+}
+
+.rule-builder-checkbox-toggle:hover {
+    background: #f3f4f6 !important;
+    border-color: #d1d5db !important;
+}
+
+.rule-builder-checkbox-toggle .modern-toggle {
+    margin: 0 !important;
+}
+
+.rule-builder-checkbox-toggle .toggle-label {
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    color: #374151 !important;
+    user-select: none !important;
+    flex: 1 !important;
 }
