@@ -1106,19 +1106,25 @@
 .case-form-group textarea,
 .case-form-group select {
     width: 100%;
-    padding: 12px;
+    padding: 12px 40px 12px 12px;
     border: 1px solid #d1d5db;
     border-radius: 8px;
     font-size: 14px;
-    font-family: inherit;
-    resize: vertical;
-    min-height: 80px;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: white;
+    color: #374151;
+    cursor: pointer;
     box-sizing: border-box;
-}
-
-.case-form-group select {
-    min-height: auto;
-    height: 44px;
+    height: auto;
+    min-height: 44px;
+    transition: all 0.2s ease;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M3 4.5L6 7.5L9 4.5" stroke="%236b7280" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 12px 12px;
 }
 
 .case-form-group textarea:focus,
@@ -1126,6 +1132,10 @@
     outline: none;
     border-color: #667eea;
     box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.case-form-group select:hover {
+    border-color: #9ca3af;
 }
 
 /* UPDATED: Larger case information section */
@@ -1197,7 +1207,7 @@
 
 .case-channel-search {
     width: 100%;
-    padding: 12px 12px 12px 40px;
+    padding: 12px 12px 12px 48px;
     border: 1px solid #d1d5db;
     border-radius: 8px;
     font-size: 14px;
@@ -1233,6 +1243,136 @@
     z-index: 1000;
     display: none;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Column-specific dropdown styling */
+.column-search-container {
+    position: relative;
+    width: 100%;
+}
+
+.column-search-input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.column-search {
+    width: 100%;
+    padding: 12px 40px 12px 44px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 14px;
+    font-family: inherit;
+    box-sizing: border-box;
+    background: white;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.column-dropdown-btn {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 6px;
+    border-radius: 4px;
+    color: #6b7280;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease, transform 0.2s ease;
+    z-index: 2;
+}
+
+.column-dropdown-btn:hover {
+    background: #f3f4f6;
+    color: #374151;
+}
+
+.column-dropdown-btn:active {
+    background: #e5e7eb;
+}
+
+.column-search:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.column-dropdown-results {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    max-height: 300px;
+    overflow-y: auto;
+    z-index: 1000;
+    display: none;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    margin-top: 4px;
+}
+
+.column-category-header {
+    padding: 12px 16px 8px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #6b7280;
+    background: #f9fafb;
+    border-bottom: 1px solid #f3f4f6;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+.column-item {
+    padding: 12px 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 1px solid #f3f4f6;
+    transition: all 0.15s ease;
+}
+
+.column-item:hover,
+.column-item.highlighted {
+    background: #f0f9ff;
+    border-color: #e0f2fe;
+}
+
+.column-item.selected {
+    background: #eff6ff;
+    border-color: #dbeafe;
+}
+
+.column-icon {
+    font-size: 16px;
+    width: 20px;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+.column-label {
+    flex: 1;
+    font-weight: 500;
+    color: #111827;
+}
+
+.column-type {
+    font-size: 12px;
+    color: #6b7280;
+    background: #f3f4f6;
+    padding: 2px 8px;
+    border-radius: 4px;
+    flex-shrink: 0;
 }
 
 .case-form-dropdown-item {
@@ -1871,8 +2011,8 @@
     top: 0;
     right: 0;
     /* CHANGED: Always anchor to right edge */
-    width: 400px;
-    min-width: 300px;
+    width: 500px;
+    min-width: 500px;
     max-width: 50vw;
     height: 100vh;
     background: #ffffff;
@@ -2948,6 +3088,111 @@
     z-index: 100030 !important;
 }
 
+/* WTT Notification System */
+.wtt-notification-banner {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 110040 !important;
+    border-radius: 12px;
+    padding: 18px 22px;
+    max-width: 450px;
+    min-width: 300px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.12), 0 4px 16px rgba(0,0,0,0.08);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    color: white;
+    backdrop-filter: blur(8px);
+    animation: wtt-slide-in 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.wtt-notification-banner.wtt-notification-error {
+    background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+    border: 2px solid #dc2626;
+}
+
+.wtt-notification-banner.wtt-notification-warning {
+    background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+    border: 2px solid #f59e0b;
+}
+
+.wtt-notification-banner.wtt-notification-success {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    border: 2px solid #10b981;
+}
+
+.wtt-notification-banner.wtt-notification-info {
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    border: 2px solid #3b82f6;
+}
+
+.wtt-notification-content {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.wtt-notification-icon {
+    font-size: 18px;
+    margin-top: 2px;
+}
+
+.wtt-notification-text {
+    flex: 1;
+}
+
+.wtt-notification-title {
+    font-weight: 600;
+    font-size: 16px;
+    margin-bottom: 6px;
+    line-height: 1.3;
+}
+
+.wtt-notification-message {
+    font-size: 14px;
+    line-height: 1.4;
+    opacity: 0.95;
+}
+
+.wtt-notification-dismiss {
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.25);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    margin-left: 8px;
+    white-space: nowrap;
+}
+
+.wtt-notification-dismiss:hover {
+    background: rgba(255,255,255,0.25);
+}
+
+@keyframes wtt-slide-in {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes wtt-slide-out {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+}
+
 @keyframes pulse-hint {
 
     0%,
@@ -3858,11 +4103,32 @@
 }
 
 .condition-logic-select {
-    padding: 6px 12px;
+    padding: 12px 40px 12px 12px;
     border: 1px solid #d1d5db;
-    border-radius: 4px;
+    border-radius: 8px;
     font-size: 14px;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     background: white;
+    color: #374151;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M3 4.5L6 7.5L9 4.5" stroke="%236b7280" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 12px 12px;
+}
+
+.condition-logic-select:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.condition-logic-select:hover {
+    border-color: #9ca3af;
 }
 
 .add-condition-btn {
