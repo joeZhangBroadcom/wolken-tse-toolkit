@@ -1937,18 +1937,6 @@
     border-color: #3b82f6;
 }
 
-.scheduler-grid {
-    display: grid;
-    grid-template-columns: 65px repeat(7, 1fr);
-    gap: 1px;
-    background: linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%);
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
-    width: fit-content;
-    margin: 0 auto;
-}
-
 .time-column {
     background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
     display: flex;
@@ -5066,15 +5054,15 @@
     left: 50%;
     transform: translate(-50%, -50%);
     width: auto;
-    min-width: 500px;
-    max-width: 90vw;
-    max-height: 85vh;
+    min-width: 800px;
+    max-width: 95vw;
+    max-height: 95vh;
     background: white;
     border-radius: 12px;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-    overflow: hidden;
     display: flex;
     flex-direction: column;
+    overflow-y: auto;
 }
 
 .scheduler-modal-header {
@@ -5118,10 +5106,11 @@
 .scheduler-modal-body {
     padding: 20px;
     flex: 1;
-    overflow-y: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
+    max-height: 90vh;
+    overflow-y: visible;
 }
 
 .schedule-description {
@@ -5136,12 +5125,14 @@
     margin: 0 0 8px 0;
     color: #374151;
     line-height: 1.5;
+    font-size: 15px;
 }
 
 .schedule-description p:last-child {
     margin-bottom: 0;
     font-weight: 600;
     color: #1f2937;
+    font-size: 15px;
 }
 
 .schedule-controls {
@@ -5196,76 +5187,110 @@
     background: #fafafa;
 }
 
-.scheduler-grid {
-    display: flex;
-    min-height: 400px;
-    max-height: 60vh;
-    overflow: auto;
+/* Work scheduler modal specific overrides */
+.work-scheduler-modal .scheduler-grid {
+    display: grid;
+    grid-template-columns: 120px repeat(7, 1fr);
+    gap: 2px;
+    background: linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%);
+    border-radius: 12px;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    margin: 0 auto;
+    max-height: 50vh;
+    overflow-y: auto;
+    overflow-x: visible;
 }
 
-.time-column {
-    flex-shrink: 0;
-    width: 80px;
-    background: #f3f4f6;
-    border-right: 1px solid #d1d5db;
-}
-
-.time-header,
-.day-header {
-    padding: 12px 8px;
-    background: #e5e7eb;
-    font-weight: 600;
-    text-align: center;
-    border-bottom: 1px solid #d1d5db;
-    font-size: 14px;
-    color: #374151;
-}
-
-.time-slot {
-    padding: 4px 6px;
-    font-size: 11px;
-    text-align: center;
-    border-bottom: 1px solid #e5e7eb;
-    color: #6b7280;
-    height: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.day-column {
-    flex: 1;
-    border-right: 1px solid #e5e7eb;
-    min-width: 100px;
-}
-
-.day-column:last-child {
-    border-right: none;
-}
-
-.day-time-slots {
+/* Work scheduler modal time column - use original styling */
+.work-scheduler-modal .time-column {
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
     display: flex;
     flex-direction: column;
 }
 
-.time-block {
-    height: 20px;
-    border-bottom: 1px solid #e5e7eb;
+/* Work scheduler modal time header - use original styling */
+.work-scheduler-modal .time-header,
+.work-scheduler-modal .day-header {
+    height: 36px;
+    background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Work scheduler modal time slots - use original styling */
+.work-scheduler-modal .time-slot {
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 600;
+    color: #64748b;
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+    border-bottom: 1px solid #e2e8f0;
+}
+
+/* Work scheduler modal day columns - use original styling */
+.work-scheduler-modal .day-column {
+    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+    display: flex;
+    flex-direction: column;
+    min-width: 90px;
+    max-width: 120px;
+}
+
+.work-scheduler-modal .day-column:last-child {
+    border-right: none;
+}
+
+.work-scheduler-modal .day-time-slots {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Work scheduler modal time blocks - use original styling */
+.work-scheduler-modal .time-block {
+    height: 28px;
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+    border-bottom: 1px solid #e2e8f0;
     cursor: pointer;
-    transition: all 0.2s;
-    background: #ffffff;
+    transition: all 0.15s ease;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    font-size: 10px;
 }
 
-.time-block:hover {
-    background: #dbeafe;
+.work-scheduler-modal .time-block:hover {
+    background: linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%);
+    transform: scale(1.02);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.time-block.active {
-    background: #3b82f6;
+.work-scheduler-modal .time-block.active {
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    color: white;
+    box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+    font-weight: 600;
 }
 
-.time-block.active:hover {
-    background: #2563eb;
+.work-scheduler-modal .time-block.active:hover {
+    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+    transform: scale(1.02);
+    box-shadow: 0 3px 12px rgba(59, 130, 246, 0.4);
 }
 
 .scheduler-modal-footer {
