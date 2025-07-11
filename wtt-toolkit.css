@@ -19,6 +19,21 @@
     font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
+.case-form-group input[type="text"],
+.case-form-group textarea,
+.case-channel-search {
+    background-image: none !important;
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+}
+
+/* Ensure proper styling for Copy Command buttons */
+.case-form-powered-by .case-form-btn {
+    font-size: 11px !important;
+    padding: 4px 8px !important;
+}
+
 .message {
     display: flex;
     gap: 12px;
@@ -2056,13 +2071,13 @@
         padding: 12px;
         margin-top: 8px;
     }
-    
+
     .scheduler-grid {
         grid-template-columns: 50px repeat(7, 1fr);
         font-size: 10px;
         width: 100%;
     }
-    
+
     .scheduler-modal-content {
         min-width: 300px;
         width: 95vw;
@@ -2077,7 +2092,7 @@
         font-size: 8px;
         height: 28px;
     }
-    
+
     .time-header {
         font-size: 8px;
         height: 28px;
@@ -2086,12 +2101,12 @@
     .time-block {
         height: 20px;
     }
-    
+
     .day-column {
         min-width: 40px;
         max-width: 60px;
     }
-    
+
     .schedule-btn {
         padding: 4px 8px;
         font-size: 11px;
@@ -3431,7 +3446,7 @@
     gap: 12px;
 }
 
-.wtt-persistent-banner .wtt-notification-content > div:first-child {
+.wtt-persistent-banner .wtt-notification-content>div:first-child {
     display: flex;
     align-items: flex-start;
     gap: 12px;
@@ -3490,10 +3505,12 @@
         transform: translateX(100%) scale(0.8);
         opacity: 0;
     }
+
     50% {
         transform: translateX(-10px) scale(1.05);
         opacity: 0.8;
     }
+
     100% {
         transform: translateX(0) scale(1);
         opacity: 1;
