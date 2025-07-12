@@ -70,14 +70,24 @@ window.DEFAULT_COLOR_RULES = [
         "operator": "equals",
         "group": "1",
         "value": "p1",
-        "caseSensitive": false
+        "caseSensitive": false,
+        "logicOperator": "AND"
+      },
+      {
+        "uniqueId": "colorRuleCondition75547740",
+        "conditionId": "colorRuleCondition75547740",
+        "column": "SLOActualDate",
+        "dataType": "datetime",
+        "operator": "is_empty",
+        "group": "1"
       }
     ],
-    "logicalExpression": "(Condition 1 AND Condition 2)",
+    "logicalExpression": "(Condition 1 AND Condition 2 AND Condition 3)",
     "groupLogic": {
       "1_2": "OR"
     },
     "logicOperators": [
+      "AND",
       "AND"
     ],
     "styling": {
