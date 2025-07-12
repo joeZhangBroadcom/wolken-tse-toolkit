@@ -74,8 +74,8 @@ window.DEFAULT_COLOR_RULES = [
         "logicOperator": "AND"
       },
       {
-        "uniqueId": "colorRuleCondition75547740",
-        "conditionId": "colorRuleCondition75547740",
+        "uniqueId": "3",
+        "conditionId": "3",
         "column": "SLOActualDate",
         "dataType": "datetime",
         "operator": "is_empty",
