@@ -117,7 +117,7 @@ window.DEFAULT_COLOR_RULES = [
         "group": "1",
         "value": "30",
         "unit": "minutes",
-        "logicOperator": "OR"
+        "logicOperator": "AND"
       },
       {
         "uniqueId": "2",
