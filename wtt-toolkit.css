@@ -2527,6 +2527,31 @@
     cursor: not-allowed;
 }
 
+.stop-chat-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #dc3545;
+    border: none;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+    margin-left: 8px;
+}
+
+.stop-chat-btn:hover {
+    background: #c82333;
+    transform: scale(1.05);
+}
+
+.stop-chat-btn:active {
+    transform: scale(0.95);
+}
+
 /* Sidebar footer */
 .sidebar-footer {
     padding: 12px 16px;
