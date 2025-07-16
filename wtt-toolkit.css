@@ -1846,6 +1846,22 @@
     }
 }
 
+/* Notebook button specific styles */
+.notebook-btn {
+    /* Keep the original icon colors */
+    filter: none !important;
+}
+
+.notebook-btn img {
+    opacity: 0.9;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.notebook-btn:hover img {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
 .title-status {
     font-size: 10px;
     margin-left: 4px;
@@ -2198,6 +2214,18 @@
     cursor: pointer;
 }
 
+/* Notebook trigger - positioned above AI assistant */
+.notebook-minimized-trigger {
+    position: fixed;
+    bottom: 90px; /* 70px above the AI assistant trigger */
+    right: -30px;
+    width: 60px;
+    height: 60px;
+    z-index: 10000;
+    transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+}
+
 .modern-minimized-trigger:hover,
 .modern-minimized-trigger.show {
     right: 10px;
@@ -2236,6 +2264,36 @@
     background: #4ade80;
     border-radius: 50%;
     animation: pulse 2s infinite;
+}
+
+/* Notebook trigger specific styles */
+.notebook-minimized-trigger:hover,
+.notebook-minimized-trigger.show {
+    right: 10px;
+}
+
+.notebook-minimized-trigger .trigger-icon {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #FFC107 0%, #FF9800 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.notebook-minimized-trigger:hover .trigger-icon {
+    transform: scale(1.1);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+}
+
+.notebook-minimized-trigger .trigger-icon img {
+    width: 50px;
+    height: 50px;
+    /* No filter - keep original notebook colors */
 }
 
 @keyframes pulse {
