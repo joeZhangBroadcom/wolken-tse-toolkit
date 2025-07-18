@@ -5637,7 +5637,7 @@ textarea.form-control {
 }
 
 .critical-fire-alert::before {
-    content: 'ðŸ”¥';
+    content: '🔥';
     position: absolute;
     left: -20px;
     top: 50%;
@@ -5647,7 +5647,7 @@ textarea.form-control {
 }
 
 .critical-fire-alert::after {
-    content: 'ðŸ”¥';
+    content: '🔥';
     position: absolute;
     right: -20px;
     top: 50%;
