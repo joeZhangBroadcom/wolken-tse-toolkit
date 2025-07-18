@@ -112,7 +112,17 @@
                 $modal.on('tbwconfirm', function () {
                     var templateName = $modal.find('#tbw-template-name').val().trim();
                     if (!templateName) {
-                        alert("Template name is required.");
+                        // Send message to parent window
+                        if (window.parent && window.parent !== window) {
+                            window.parent.postMessage({
+                                type: 'showNotification',
+                                title: 'Template Name Required',
+                                message: 'Please enter a name for the template.',
+                                messageType: 'error'
+                            }, '*');
+                        } else {
+                            alert("Template name is required.");
+                        }
                         return false;
                     }
                     var htmlContent = editorContent;
@@ -123,7 +133,17 @@
                     };
                     templates.push(newTemplate);
                     localStorage.setItem('myTemplateSave', JSON.stringify(templates));
-                    alert('Template saved!');
+                    // Send message to parent window
+                    if (window.parent && window.parent !== window) {
+                        window.parent.postMessage({
+                            type: 'showNotification',
+                            title: 'Template Saved',
+                            message: `The template "${templateName}" has been created!`,
+                            messageType: 'success'
+                        }, '*');
+                    } else {
+                        alert('Template saved!');
+                    }
                     trumbowyg.$ed.trumbowyg('closeModal');
                 });
 
@@ -141,7 +161,20 @@
         return {
             fn: function () {
                 var templates = JSON.parse(localStorage.getItem('myTemplateSave') || '[]');
-                if (!templates.length) return alert('No templates to edit.');
+                if (!templates.length) {
+                    // Send message to parent window
+                    if (window.parent && window.parent !== window) {
+                        window.parent.postMessage({
+                            type: 'showNotification',
+                            title: 'No Templates',
+                            message: 'There are no templates to edit.',
+                            messageType: 'info'
+                        }, '*');
+                    } else {
+                        alert('No templates to edit.');
+                    }
+                    return;
+                }
                 var options = buildTemplateOptions(templates);
 
                 // Modal content with hidden new name input
@@ -188,7 +221,17 @@
                     if ($modal.find('#tbw-new-name-row').is(':visible')) {
                         newName = $modal.find('#tbw-template-edit-name').val().trim();
                         if (!newName) {
-                            alert("Template name is required.");
+                            // Send message to parent window
+                            if (window.parent && window.parent !== window) {
+                                window.parent.postMessage({
+                                    type: 'showNotification',
+                                    title: 'Template Name Required',
+                                    message: 'Please enter a name for the template.',
+                                    messageType: 'error'
+                                }, '*');
+                            } else {
+                                alert("Template name is required.");
+                            }
                             return false;
                         }
                     } else {
@@ -200,7 +243,17 @@
                         html: htmlContent
                     };
                     localStorage.setItem('myTemplateSave', JSON.stringify(templates));
-                    alert('Template updated!');
+                    // Send message to parent window
+                    if (window.parent && window.parent !== window) {
+                        window.parent.postMessage({
+                            type: 'showNotification',
+                            title: 'Template Updated',
+                            message: `The template "${newName}" has been updated successfully!`,
+                            messageType: 'success'
+                        }, '*');
+                    } else {
+                        alert('Template updated!');
+                    }
                     trumbowyg.$ed.trumbowyg('closeModal');
                 });
 
@@ -219,7 +272,20 @@
             fn: function () {
                 var templates = JSON.parse(localStorage.getItem('myTemplateSave') || '[]');
                 var options = buildTemplateOptions(templates); 
-                if (!templates.length) return alert('No templates to delete.');
+                if (!templates.length) {
+                    // Send message to parent window
+                    if (window.parent && window.parent !== window) {
+                        window.parent.postMessage({
+                            type: 'showNotification',
+                            title: 'No Templates',
+                            message: 'There are no templates to delete.',
+                            messageType: 'info'
+                        }, '*');
+                    } else {
+                        alert('No templates to delete.');
+                    }
+                    return;
+                }
                 var modalContent = `
                     <div style="font-size:0.85em;color:#888;margin-bottom:8px;">
                         This will permanently remove the selected template.
@@ -234,10 +300,21 @@
 
                 $modal.on('tbwconfirm', function () {
                     var idx = $modal.find('#tbw-template-delete-select').val();
-                    if (!confirm('Delete template "' + templates[idx].name + '"?')) return false;
+                    var deletedTemplateName = templates[idx].name;
+                    if (!confirm('Delete template "' + deletedTemplateName + '"?')) return false;
                     templates.splice(idx, 1);
                     localStorage.setItem('myTemplateSave', JSON.stringify(templates));
-                    alert('Template deleted!');
+                    // Send message to parent window
+                    if (window.parent && window.parent !== window) {
+                        window.parent.postMessage({
+                            type: 'showNotification',
+                            title: 'Template Deleted',
+                            message: `The template "${deletedTemplateName}" has been deleted!`,
+                            messageType: 'success'
+                        }, '*');
+                    } else {
+                        alert('Template deleted!');
+                    }
                     trumbowyg.$ed.trumbowyg('closeModal');
                 });
 
